@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airport Management Dashboard</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome & Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Toastr.js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        /* Glassmorphism card/table hover */
+        .summary-card, .card, .table {
+            transition: box-shadow 0.2s, background 0.2s, transform 0.18s;
+        }
+        .summary-card:hover, .card:hover, .table-hover tbody tr:hover {
+            background: rgba(255,255,255,0.75) !important;
+            box-shadow: 0 8px 32px rgba(30,144,255,0.17), 0 2px 8px rgba(30,144,255,0.09);
+            backdrop-filter: blur(2.5px);
+            transform: translateY(-2px) scale(1.02);
+        }
+        /* Ripple effect for buttons */
+        .btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple 0.5s linear;
+            background: rgba(30,144,255,0.18);
+            pointer-events: none;
+            z-index: 1;
+        }
+        @keyframes ripple {
+            to { transform: scale(2.5); opacity: 0; }
+        }
+        /* FAB hover */
+        .fab:hover {
+            background: #0d6efdcc !important;
+            box-shadow: 0 8px 32px rgba(30,144,255,0.23);
+            transform: scale(1.07);
+        }
+        /* Avatar online indicator */
+        .user-avatar {
+            position: relative;
+        }
+        .user-avatar .online-dot {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 10px; height: 10px;
+            background: #28c76f;
+            border: 2px solid #fff;
+            border-radius: 50%;
+        }
+    
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bs-body-bg, #f7fafd);
+        }
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(30,144,255,0.07);
+        }
+        .sidebar {
+            min-width: 220px;
+            max-width: 220px;
+            background: #1E90FF;
+            color: #fff;
+            transition: all 0.3s;
+            height: 100vh;
+            position: fixed;
+            top: 0; left: 0; z-index: 1030;
+            box-shadow: 2px 0 8px rgba(30,144,255,0.07);
+        }
+        .sidebar.collapsed {
+            min-width: 60px;
+            max-width: 60px;
+        }
+        .sidebar .nav-link {
+            color: #fff;
+            border-radius: 8px;
+            margin: 2px 0;
+            transition: background 0.2s;
+        }
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        .sidebar .nav-icon {
+            width: 24px;
+        }
+        .sidebar .nav-text {
+            transition: opacity 0.2s;
+        }
+        .sidebar.collapsed .nav-text {
+            opacity: 0;
+        }
+        .main-content {
+            margin-left: 220px;
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            transition: margin-left 0.3s;
+        }
+        .sidebar.collapsed ~ .main-content {
+            margin-left: 60px;
+        }
+        .summary-card {
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(30,144,255,0.09);
+            background: #fff;
+            transition: box-shadow 0.2s, background 0.2s;
+            margin-bottom: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .summary-card .icon {
+            font-size: 2.2rem;
+            color: #1E90FF;
+            margin-right: 1rem;
+        }
+        .summary-card .card-body {
+            display: flex;
+            align-items: center;
+        }
+        .summary-card .count {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1E90FF;
+            animation: popIn 1.1s cubic-bezier(.6,-0.28,.74,.05) 1;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.7); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        /* Notification Bell */
+        .bell-animate {
+            animation: bellRing 1s .2s cubic-bezier(.36,.07,.19,.97) both;
+        }
+        @keyframes bellRing {
+            0% { transform: rotate(0); }
+            10% { transform: rotate(15deg); }
+            20% { transform: rotate(-10deg); }
+            30% { transform: rotate(10deg); }
+            40% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
+            60% { transform: rotate(-4deg); }
+            70% { transform: rotate(4deg); }
+            80%,100% { transform: rotate(0); }
+        }
+        /* Table scroll */
+        .table-responsive {
+            max-height: 350px;
+            overflow-y: auto;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            background: #f0f4fa;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #b2d4fa;
+            border-radius: 8px;
+        }
+        /* Dark mode */
+        body.dark-mode {
+            background: #1a2233;
+            color: #eaf2fb;
+        }
+        body.dark-mode .navbar, body.dark-mode .summary-card, body.dark-mode .table, body.dark-mode .dropdown-menu {
+            background: #232d43 !important;
+            color: #eaf2fb;
+        }
+        body.dark-mode .sidebar {
+            background: #232d43;
+        }
+        body.dark-mode .summary-card .count, body.dark-mode .summary-card .icon {
+            color: #7bbcff;
+        }
+        body.dark-mode .table th, body.dark-mode .table td {
+            color: #eaf2fb;
+        }
+        .dark-toggle {
+            cursor: pointer;
+            font-size: 1.25rem;
+        }
+        @media (max-width: 991px) {
+            .sidebar { position: fixed; left: -220px; }
+            .sidebar.open { left: 0; }
+            .main-content { margin-left: 0; }
+            .sidebar.collapsed ~ .main-content { margin-left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-white px-3 py-2 sticky-top">
+        <div class="container-fluid">
+            <!-- Persistent sidebar toggle -->
+            <button class="btn btn-outline-primary me-2 d-inline-flex align-items-center" id="sidebarToggleBtn" aria-label="Toggle Sidebar" style="box-shadow:0 2px 8px rgba(30,144,255,0.07);">
+                <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="https://i.ibb.co/4J2Qw5S/airport-logo.png" alt="Airport Logo" height="36" class="me-2">
+                <span class="fw-bold text-primary">Khartoum Airport</span>
+            </a>
+            <span class="fs-5 ms-3 fw-semibold d-none d-lg-block">Dashboard</span>
+            <ul class="navbar-nav ms-auto align-items-center flex-row gap-3">
+                <li class="nav-item dropdown">
+                    <a class="nav-link position-relative" href="#" id="notifDropdown" data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" title="System Alerts">
+                        <i class="fa fa-bell fa-lg"></i>
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="notifBadge">3</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="notifDropdown" style="min-width: 320px;">
+                        <li class="dropdown-header">Recent Alerts</li>
+                        <li><a class="dropdown-item small" href="#"><i class="fa fa-plane text-primary me-2"></i>Flight QR132 arrived</a></li>
+                        <li><a class="dropdown-item small" href="#"><i class="fa fa-exclamation-circle text-danger me-2"></i>Flight ET401 delayed</a></li>
+                        <li><a class="dropdown-item small" href="#"><i class="fa fa-user text-warning me-2"></i>New passenger inquiry</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-center text-primary" href="#">View all</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <select class="form-select form-select-sm" style="width: 80px;" data-bs-toggle="tooltip" title="Language">
+                        <option>EN</option>
+                        <option>AR</option>
+                    </select>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-toggle="tooltip" title="User Menu">
+                        <img src="https://i.ibb.co/9h3Yw7b/user.png" alt="User" width="32" class="rounded-circle me-2">
+                        <span class="d-none d-md-inline">Admin</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userDropdown">
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="#">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Logout</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-2">
+                    <i class="bi bi-moon-stars dark-toggle" id="darkToggle" data-bs-toggle="tooltip" title="Toggle dark mode"></i>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="d-flex align-items-center justify-content-between px-3 py-2">
+            <span class="fw-bold fs-5">Menu</span>
+            <button class="btn btn-sm btn-light d-lg-none" id="sidebarCollapse"><i class="fa fa-bars"></i></button>
+        </div>
+        <nav class="nav flex-column mt-3">
+            <a class="nav-link active" href="#"><i class="bi bi-speedometer2 nav-icon" data-bs-toggle="tooltip" title="Dashboard"></i> <span class="nav-text">Dashboard</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-airplane nav-icon" data-bs-toggle="tooltip" title="Flight Status"></i> <span class="nav-text">Flight Status</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-building nav-icon" data-bs-toggle="tooltip" title="Airlines Management"></i> <span class="nav-text">Airlines Management</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-bag-check nav-icon" data-bs-toggle="tooltip" title="Airport Services"></i> <span class="nav-text">Airport Services</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-chat-left-text nav-icon" data-bs-toggle="tooltip" title="Passenger Support & Complaints"></i> <span class="nav-text">Passenger Support & Complaints</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-map nav-icon" data-bs-toggle="tooltip" title="Terminal Map Editor"></i> <span class="nav-text">Terminal Map Editor</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-door-open nav-icon" data-bs-toggle="tooltip" title="Gate Management"></i> <span class="nav-text">Gate Management</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-people nav-icon" data-bs-toggle="tooltip" title="Staff & Access Control"></i> <span class="nav-text">Staff & Access Control</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-file-earmark-text nav-icon" data-bs-toggle="tooltip" title="CMS Pages"></i> <span class="nav-text">CMS Pages</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-gear nav-icon" data-bs-toggle="tooltip" title="System Configuration"></i> <span class="nav-text">System Configuration</span></a>
+            <a class="nav-link" href="#"><i class="bi bi-clipboard-data nav-icon" data-bs-toggle="tooltip" title="Reports & Audit Logs"></i> <span class="nav-text">Reports & Audit Logs</span></a>
+        </nav>
+    </aside>
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <div class="container-fluid">
+            <!-- Breadcrumbs -->
+            <nav aria-label="breadcrumb" class="mt-2 mb-3">
+                <ol class="breadcrumb bg-white rounded-3 shadow-sm px-3 py-2">
+                    <li class="breadcrumb-item"><a href="#" class="text-decoration-none">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+            <!-- Dashboard Cards -->
+            <div class="row g-3 mb-4">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#eaf6ff;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-airplane-fill text-primary fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">Total Flights Today</div>
+                            <div class="count fs-3 fw-bold" id="totalFlights">32</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#e8fafd;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-building text-info fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">Active Airlines</div>
+                            <div class="count fs-3 fw-bold" id="activeAirlines">11</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#fff4e6;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-exclamation-triangle text-warning fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">Delayed Flights</div>
+                            <div class="count fs-3 fw-bold" id="delayedFlights">4</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#eaf6ff;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-envelope text-success fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">New Inquiries</div>
+                            <div class="count fs-3 fw-bold" id="newInquiries">7</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#e8fafd;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-door-open text-secondary fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">Gate Availability</div>
+                            <div class="count fs-3 fw-bold" id="gateAvailability">5</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 col-xl-2">
+                    <div class="summary-card card border-0 shadow-sm p-3 d-flex flex-row align-items-center animate-card" style="background:#fff4e6;">
+                        <div class="icon bg-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:48px;height:48px;"><i class="bi bi-cloud-sun text-primary fs-3"></i></div>
+                        <div>
+                            <div class="text-muted small">Weather</div>
+                            <div class="count fs-5 fw-bold" id="weatherWidget">--°C</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flight Table + Passenger Feed -->
+            <div class="row g-3">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center bg-white">
+                            <h6 class="mb-0">Flight Overview</h6>
+                            <div class="d-flex align-items-center gap-2">
+                                <input type="text" class="form-control form-control-sm" id="flightSearch" placeholder="Search...">
+                                <select class="form-select form-select-sm" id="airlineFilter">
+                                    <option value="">All Airlines</option>
+                                    <option>Qatar Airways</option>
+                                    <option>Ethiopian Airlines</option>
+                                    <option>Saudia</option>
+                                    <option>EgyptAir</option>
+                                </select>
+                                <select class="form-select form-select-sm" id="statusFilter">
+                                    <option value="">All Status</option>
+                                    <option value="On Time">On Time</option>
+                                    <option value="Delayed">Delayed</option>
+                                    <option value="Arrived">Arrived</option>
+                                    <option value="Cancelled">Cancelled</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive nice-scrollbar">
+                            <table class="table table-hover align-middle mb-0" id="flightsTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th scope="col">Flight No.</th>
+                                        <th scope="col">Airline</th>
+                                        <th scope="col">From/To</th>
+                                        <th scope="col">Gate</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>QR132</td>
+                                        <td>Qatar Airways</td>
+                                        <td>Doha</td>
+                                        <td>B12</td>
+                                        <td><span class="badge bg-success">On Time</span></td>
+                                        <td>12:30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ET401</td>
+                                        <td>Ethiopian Airlines</td>
+                                        <td>Addis Ababa</td>
+                                        <td>A3</td>
+                                        <td><span class="badge bg-danger">Delayed</span></td>
+                                        <td>13:10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>SV211</td>
+                                        <td>Saudia</td>
+                                        <td>Riyadh</td>
+                                        <td>C5</td>
+                                        <td><span class="badge bg-success">On Time</span></td>
+                                        <td>14:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MS855</td>
+                                        <td>EgyptAir</td>
+                                        <td>Cairo</td>
+                                        <td>B8</td>
+                                        <td><span class="badge bg-secondary">Arrived</span></td>
+                                        <td>15:45</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between align-items-center">
+                            <nav>
+                                <ul class="pagination pagination-sm mb-0" id="tablePagination">
+                                    <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                                </ul>
+                            </nav>
+                            <span class="text-muted small">Showing 1 to 4 of 8 flights</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm mb-3" style="height: 340px;">
+                        <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">Passenger Support Feed</h6>
+                        </div>
+                        <div class="list-group list-group-flush nice-scrollbar" style="max-height: 250px; overflow-y: auto;">
+                            <div class="list-group-item d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="fw-semibold">Ahmed Musa</div>
+                                    <div class="small text-muted">Lost baggage at Gate B12</div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-success me-1 resolve-btn" data-bs-toggle="tooltip" title="Mark as resolved"><i class="bi bi-check2"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary respond-btn" data-bs-toggle="tooltip" title="Respond"><i class="bi bi-reply"></i></button>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="fw-semibold">Sara Khalid</div>
+                                    <div class="small text-muted">Inquiry about flight delay</div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-success me-1 resolve-btn" data-bs-toggle="tooltip" title="Mark as resolved"><i class="bi bi-check2"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary respond-btn" data-bs-toggle="tooltip" title="Respond"><i class="bi bi-reply"></i></button>
+                                </div>
+                            </div>
+                            <div class="list-group-item d-flex align-items-start justify-content-between">
+                                <div>
+                                    <div class="fw-semibold">Mohamed Ali</div>
+                                    <div class="small text-muted">Complaint: check-in counter closed</div>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-success me-1 resolve-btn" data-bs-toggle="tooltip" title="Mark as resolved"><i class="bi bi-check2"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary respond-btn" data-bs-toggle="tooltip" title="Respond"><i class="bi bi-reply"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Live Weather Widget -->
+                    <div class="card border-0 shadow-sm" id="liveWeatherCard">
+                        <div class="card-body d-flex align-items-center">
+                            <div class="me-3">
+                                <i class="bi bi-cloud-sun text-primary" style="font-size: 2.5rem;"></i>
+                            </div>
+                            <div>
+                                <div class="fw-bold" id="weatherTemp">--°C</div>
+                                <div class="small text-muted" id="weatherDesc">Loading...</div>
+                                <div class="small text-muted" id="weatherWind">-- km/h</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Toast Container -->
+    <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+        <div id="toastsContainer"></div>
+    </div>
+    <!-- Floating Action Button (FAB) -->
+    <button class="fab btn btn-primary rounded-circle shadow-lg" id="fabAction" data-bs-toggle="tooltip" title="Add Flight" style="position:fixed;bottom:32px;right:32px;width:60px;height:60px;z-index:1100;display:flex;align-items:center;justify-content:center;font-size:2rem;">
+        <i class="bi bi-plus-lg"></i>
+    </button>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery (for Toastr.js) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Toastr.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Ripple effect for all .btn
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const circle = document.createElement('span');
+                circle.classList.add('ripple');
+                const rect = btn.getBoundingClientRect();
+                circle.style.width = circle.style.height = Math.max(rect.width, rect.height) + 'px';
+                circle.style.left = (e.clientX - rect.left - rect.width/2) + 'px';
+                circle.style.top = (e.clientY - rect.top - rect.height/2) + 'px';
+                btn.appendChild(circle);
+                setTimeout(() => circle.remove(), 500);
+            });
+        });
+
+        // Sidebar toggling only via icon/button in navbar
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        sidebarToggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            sidebarToggleBtn.setAttribute('aria-pressed', sidebar.classList.contains('collapsed'));
+        });
+
+        // FAB action
+        document.getElementById('fabAction').addEventListener('click', function() {
+            toastr.success('<i class="bi bi-plus-circle me-2"></i>Quick action: Add Flight window opened!');
+        });
+
+        // Animate summary cards
+        document.querySelectorAll('.animate-card').forEach((el, i) => {
+            el.style.opacity = 0;
+            setTimeout(() => {
+                el.style.transition = 'opacity 0.8s cubic-bezier(.4,2,.6,1)';
+                el.style.opacity = 1;
+            }, 200 + i * 120);
+        });
+
+
+        // Table search/filter
+        $('#flightSearch').on('keyup', function() {
+            var value = $(this).val().toLowerCase();
+            $('#flightsTable tbody tr').filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        $('#airlineFilter, #statusFilter').on('change', function() {
+            var airline = $('#airlineFilter').val();
+            var status = $('#statusFilter').val();
+            $('#flightsTable tbody tr').each(function() {
+                var show = true;
+                if (airline && $(this).find('td').eq(1).text() !== airline) show = false;
+                if (status && $(this).find('td').eq(4).text().indexOf(status) === -1) show = false;
+                $(this).toggle(show);
+            });
+        });
+
+        // Passenger feed actions
+        $('.resolve-btn').click(function() {
+            $(this).closest('.list-group-item').addClass('text-decoration-line-through opacity-50');
+            toastr.success('Marked as resolved');
+        });
+        $('.respond-btn').click(function() {
+            toastr.info('Reply window opened (demo)');
+        });
+
+        // Weather widget (demo, randomize for now)
+        function updateWeatherDemo() {
+            var temp = (28 + Math.floor(Math.random()*6));
+            var wind = (8 + Math.floor(Math.random()*6));
+            var descs = ['Sunny', 'Partly Cloudy', 'Windy', 'Clear', 'Scattered Clouds'];
+            var desc = descs[Math.floor(Math.random()*descs.length)];
+            $('#weatherWidget, #weatherTemp').text(temp + '°C');
+            $('#weatherDesc').text(desc);
+            $('#weatherWind').text(wind + ' km/h');
+        }
+        updateWeatherDemo();
+        setInterval(updateWeatherDemo, 5*60*1000);
+
+        // Tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        // Sidebar collapse (mobile and desktop)
+        const sidebar = document.getElementById('sidebar');
+        const sidebarCollapse = document.getElementById('sidebarCollapse');
+        if (sidebarCollapse) {
+            sidebarCollapse.addEventListener('click', () => {
+                sidebar.classList.toggle('open');
+            });
+        }
+        sidebar.addEventListener('dblclick', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+
+        // Dark mode toggle
+        const darkToggle = document.getElementById('darkToggle');
+        darkToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+
+        // Notification bell animation
+        const notifBadge = document.getElementById('notifBadge');
+        const notifDropdown = document.getElementById('notifDropdown');
+        function animateBell() {
+            notifDropdown.querySelector('i').classList.add('bell-animate');
+            setTimeout(() => notifDropdown.querySelector('i').classList.remove('bell-animate'), 1000);
+        }
+        setTimeout(() => {
+            notifBadge.textContent = '4';
+            notifBadge.classList.add('animate__animated', 'animate__bounceIn');
+            animateBell();
+            toastr.info('New alert: Flight delayed');
+        }, 3200);
+
+        // Toastr config
+        toastr.options = {
+            "closeButton": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "3000"
+        };
+        // Demo: show a success toast on load
+        $(function() {
+            setTimeout(() => toastr.success('Welcome to Airport Management Dashboard!'), 700);
+        });
+    </script>
+</body>
+</html>

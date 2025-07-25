@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- App Store badge Arabic (sample, replace with official asset if needed) -->
+<svg width="180" height="60" viewBox="0 0 180 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="180" height="60" rx="12" fill="#fff"/>
+  <g font-family="Cairo, Arial, sans-serif" font-size="18" font-weight="bold" fill="#222">
+    <text x="90" y="35" text-anchor="middle">حمّل من App Store</text>
+  </g>
+  <g>
+    <image href="https://developer.apple.com/assets/elements/badges/download-on-the-app-store/ar.svg" x="10" y="10" height="40"/>
+  </g>
+</svg>

@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <!-- AOS Animation CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+    <!-- Animate.css for WOW.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="الموقع الرسمي لمطار الخرطوم الدولي - أحدث المعلومات والخدمات للمسافرين، شركات الطيران، والأعمال.">
+    <meta name="keywords" content="مطار الخرطوم, الرحلات, خدمات المطار, السودان, Khartoum Airport, KRT, Sudan, Flights, Airport Services, Travel, Business">
+    <meta name="author" content="Khartoum International Airport">
+    <meta name="theme-color" content="#007b5e">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:title" content="مطار الخرطوم الدولي | Khartoum International Airport">
+    <meta property="og:description" content="الموقع الرسمي لمطار الخرطوم الدولي - أحدث المعلومات والخدمات للمسافرين، شركات الطيران، والأعمال.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ar_AR">
+    <meta property="og:image" content="/assets/og-image.jpg">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="مطار الخرطوم الدولي | Khartoum International Airport">
+    <meta name="twitter:description" content="الموقع الرسمي لمطار الخرطوم الدولي - أحدث المعلومات والخدمات للمسافرين، شركات الطيران، والأعمال.">
+    <meta name="twitter:image" content="/assets/og-image.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khartoum Airport</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #f8fafc;
+            font-family: 'Segoe UI', 'Cairo', Arial, sans-serif;
+        }
+        .navbar {
+            background: #007b5e;
+        }
+        .navbar-brand, .nav-link, .navbar-nav .nav-link.active {
+            color: #fff !important;
+        }
+        .hero {
+            background: linear-gradient(135deg, #007b5e 60%, #f8fafc 100%);
+            color: #fff;
+            padding: 80px 0 60px 0;
+            text-align: center;
+        }
+        .flight-board {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+        .chatbot {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 340px;
+            max-width: 90vw;
+            z-index: 9999;
+        }
+        .chatbot-header {
+            background: #007b5e;
+            color: #fff;
+            padding: 10px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            font-weight: bold;
+        }
+        .chatbot-body {
+            background: #f8fafc;
+            height: 260px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .chatbot-input {
+            display: flex;
+            border-top: 1px solid #e0e0e0;
+            background: #fff;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+        .chatbot-input input {
+            border: none;
+            flex: 1;
+            padding: 10px;
+            outline: none;
+        }
+        .chatbot-input button {
+            border: none;
+            background: #007b5e;
+            color: #fff;
+            padding: 0 15px;
+            cursor: pointer;
+            border-bottom-right-radius: 12px;
+        }
+        .chatbot-message.user {
+            text-align: right;
+            color: #007b5e;
+        }
+        .chatbot-message.bot {
+            text-align: left;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top py-2" dir="rtl">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+          <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="شعار المطار" width="38" height="38" style="object-fit:contain;">
+          <span class="fw-bold text-primary">مطار الخرطوم الدولي</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="فتح القائمة">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+            <li class="nav-item"><a class="nav-link active" href="#hero"><i class="bi bi-house-door"></i> الرئيسية</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about"><i class="bi bi-info-circle"></i> عن المطار</a></li>
+            <li class="nav-item"><a class="nav-link" href="#breaking-news"><i class="bi bi-broadcast"></i> الأخبار</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#flights" id="navbarDropdownFlights" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-airplane"></i> الرحلات
+              </a>
+              <ul class="dropdown-menu text-end" aria-labelledby="navbarDropdownFlights">
+                <li><a class="dropdown-item" href="#live-flights">الرحلات المباشرة</a></li>
+                <li><a class="dropdown-item" href="#flights">جدول الرحلات</a></li>
+                <li><a class="dropdown-item" href="#lost-found">المفقودات</a></li>
+                <li><a class="dropdown-item" href="#delays">تأخيرات / إلغاء</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#services" id="navbarDropdownServices" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-people"></i> الخدمات
+              </a>
+              <ul class="dropdown-menu text-end" aria-labelledby="navbarDropdownServices">
+                <li><a class="dropdown-item" href="#passenger-services">خدمات المسافرين</a></li>
+                <li><a class="dropdown-item" href="#travel-guidelines">إرشادات السفر</a></li>
+                <li><a class="dropdown-item" href="#special-assistance">مساعدة خاصة</a></li>
+                <li><a class="dropdown-item" href="#interactive-guide">الدليل التفاعلي</a></li>
+                <li><a class="dropdown-item" href="#transport">النقل من/إلى المطار</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#business-services" id="navbarDropdownBusiness" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-briefcase"></i> الأعمال
+              </a>
+              <ul class="dropdown-menu text-end" aria-labelledby="navbarDropdownBusiness">
+                <li><a class="dropdown-item" href="#business-services">خدمات الأعمال</a></li>
+                <li><a class="dropdown-item" href="#jobs">الوظائف</a></li>
+              </ul>
+            </li>
+            <li class="nav-item d-lg-none"><a class="nav-link" href="#contact"><i class="bi bi-envelope"></i> اتصل بنا</a></li>
+          </ul>
+          <div class="d-none d-lg-flex align-items-center gap-3 ms-4">
+            <a href="#contact" class="btn btn-gradient rounded-pill px-4 py-2 fw-bold shadow-sm contact-nav-btn position-relative" aria-label="اتصل بنا" tabindex="0">
+              <i class="bi bi-envelope-fill fs-5 me-2"></i>
+              اتصل بنا
+              <span class="contact-pulse"></span>
+            </a>
+            <a href="#" class="text-secondary fs-5" title="فيسبوك"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="text-secondary fs-5" title="تويتر"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="text-secondary fs-5" title="انستغرام"><i class="bi bi-instagram"></i></a>
+            <div class="dropdown ms-3">
+              <button class="btn btn-outline-secondary dropdown-toggle px-3" type="button" id="langSwitcher" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-translate"></i> العربية
+              </button>
+              <ul class="dropdown-menu text-end" aria-labelledby="langSwitcher">
+                <li><a class="dropdown-item" href="#">العربية</a></li>
+                <li><a class="dropdown-item" href="#">English</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+      </div>
+    </nav>
+    <!-- Hero -->
+    <section class="hero" id="hero" data-aos="fade-up">
+      <div class="container">
+        <h1 class="display-4">مرحباً بكم في مطار الخرطوم الدولي</h1>
+        <p class="lead">رحلات آمنة، تجربة حديثة، خدمة سودانية أصيلة</p>
+        <a href="#flights" class="btn btn-light btn-lg mt-3">عرض لوحة الرحلات</a>
+      </div>
+    </section>
+    <!-- Breaking News -->
+    <section id="breaking-news" class="py-3 bg-danger bg-gradient text-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="h4 mb-2">أخبار عاجلة</h2>
+        <div id="breakingNewsContent" class="breaking-news-list">
+  <div class="row g-3">
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card breaking-news-card shadow-sm border-0 h-100">
+        <div class="card-body d-flex flex-column gap-2">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-exclamation-triangle-fill text-warning fs-4"></i>
+            <span class="fw-bold text-danger">تنبيه أمني</span>
+          </div>
+          <div class="news-title fw-semibold">تم إغلاق بوابة رقم 3 مؤقتاً للصيانة، يرجى استخدام البوابات البديلة.</div>
+          <div class="news-time text-muted small mt-auto text-end">منذ 5 دقائق</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card breaking-news-card shadow-sm border-0 h-100">
+        <div class="card-body d-flex flex-column gap-2">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-cloud-lightning-rain-fill text-info fs-4"></i>
+            <span class="fw-bold text-primary">طقس</span>
+          </div>
+          <div class="news-title fw-semibold">تأخير بعض الرحلات بسبب سوء الأحوال الجوية في المنطقة.</div>
+          <div class="news-time text-muted small mt-auto text-end">منذ 15 دقيقة</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card breaking-news-card shadow-sm border-0 h-100">
+        <div class="card-body d-flex flex-column gap-2">
+          <div class="d-flex align-items-center gap-2 mb-2">
+            <i class="bi bi-megaphone-fill text-success fs-4"></i>
+            <span class="fw-bold text-success">إعلان هام</span>
+          </div>
+          <div class="news-title fw-semibold">افتتاح صالة ركاب جديدة توفر خدمات إضافية للمسافرين.</div>
+          <div class="news-time text-muted small mt-auto text-end">اليوم</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      </div>
+    </section>
+    <!-- Live Flight Status -->
+    <section id="live-flights" class="py-4 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="h4 mb-3">حالة الرحلات المباشرة</h2>
+        <div id="liveFlightStatus">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover align-middle text-center bg-white">
+      <thead class="table-primary">
+        <tr>
+          <th>رقم الرحلة</th>
+          <th>الخطوط الجوية</th>
+          <th>الوجهة</th>
+          <th>الوقت المجدول</th>
+          <th>الحالة</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SD123</td>
+          <td>بدر للطيران</td>
+          <td>دبي</td>
+          <td>13:45</td>
+          <td><span class="badge bg-success">وصلت</span></td>
+        </tr>
+        <tr>
+          <td>SD456</td>
+          <td>تركية</td>
+          <td>اسطنبول</td>
+          <td>14:30</td>
+          <td><span class="badge bg-warning text-dark">في الطريق</span></td>
+        </tr>
+        <tr>
+          <td>SD789</td>
+          <td>الخطوط السعودية</td>
+          <td>جدة</td>
+          <td>15:10</td>
+          <td><span class="badge bg-danger">ملغاة</span></td>
+        </tr>
+        <tr>
+          <td>SD321</td>
+          <td>فلاي دبي</td>
+          <td>دبي</td>
+          <td>16:00</td>
+          <td><span class="badge bg-info text-dark">مجدولة</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-end text-muted small mt-2">آخر تحديث: 23 يوليو 2025 - 11:31 صباحاً</div>
+</div>
+      </div>
+    </section>
+    <!-- Quick Links -->
+    <section id="quick-links" class="py-5 bg-transparent" data-aos="fade-up">
+  <div class="container">
+    <div class="glass-card shadow-lg p-4 p-md-5 border-0 mb-4" style="border-radius: 1.6rem;">
+      <h2 class="fw-bold mb-4 text-center display-6" style="letter-spacing:0.5px"><i class="bi bi-lightning-charge-fill text-warning ms-2"></i>روابط سريعة</h2>
+      <div class="row g-4 justify-content-center quick-links-row">
+        <div class="col-6 col-md-3">
+          <a href="#flights" class="quick-link-card d-flex flex-column align-items-center justify-content-center text-decoration-none shadow-sm glass-card border-0 p-4 h-100" tabindex="0" aria-label="جدول الرحلات">
+            <span class="quick-link-icon bg-primary-gradient mb-2"><i class="bi bi-table fs-1"></i></span>
+            <span class="quick-link-label fw-bold">جدول الرحلات</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#lost-found" class="quick-link-card d-flex flex-column align-items-center justify-content-center text-decoration-none shadow-sm glass-card border-0 p-4 h-100" tabindex="0" aria-label="المفقودات">
+            <span class="quick-link-icon bg-warning-gradient mb-2"><i class="bi bi-search fs-1"></i></span>
+            <span class="quick-link-label fw-bold">المفقودات</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#jobs" class="quick-link-card d-flex flex-column align-items-center justify-content-center text-decoration-none shadow-sm glass-card border-0 p-4 h-100" tabindex="0" aria-label="الوظائف">
+            <span class="quick-link-icon bg-success-gradient mb-2"><i class="bi bi-briefcase fs-1"></i></span>
+            <span class="quick-link-label fw-bold">الوظائف</span>
+          </a>
+        </div>
+        <div class="col-6 col-md-3">
+          <a href="#contact" class="quick-link-card d-flex flex-column align-items-center justify-content-center text-decoration-none shadow-sm glass-card border-0 p-4 h-100" tabindex="0" aria-label="اتصل بنا">
+            <span class="quick-link-icon bg-info-gradient mb-2"><i class="bi bi-envelope fs-1"></i></span>
+            <span class="quick-link-label fw-bold">اتصل بنا</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Flight Board -->
+    <section id="flights" class="py-5" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">لوحة الرحلات</h2>
+        <div class="flight-board" id="flightBoard">
+          <div class="text-center">جاري تحميل الرحلات...</div>
+        </div>
+      </div>
+    </section>
+    <!-- Passenger Services -->
+    <section id="passenger-services" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">خدمات المسافرين</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 passenger-service-card">
+              <div class="card-body text-center">
+                <div class="service-icon bg-primary-gradient mb-3"><i class="bi bi-cup-hot fs-1"></i></div>
+                <h5 class="card-title mb-2">صالات الانتظار</h5>
+                <p class="card-text">استمتع بالراحة في صالات الانتظار الحديثة والمجهزة بخدمات الضيافة والإنترنت المجاني.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 passenger-service-card">
+              <div class="card-body text-center">
+                <div class="service-icon bg-success-gradient mb-3"><i class="bi bi-suitcase2 fs-1"></i></div>
+                <h5 class="card-title mb-2">خدمات الأمتعة</h5>
+                <p class="card-text">تسهيلات للأمتعة المفقودة والمعثور عليها، وخدمة تغليف الأمتعة للحماية الإضافية.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 passenger-service-card">
+              <div class="card-body text-center">
+                <div class="service-icon bg-info-gradient mb-3"><i class="bi bi-wifi fs-1"></i></div>
+                <h5 class="card-title mb-2">واي فاي مجاني</h5>
+                <p class="card-text">اتصال إنترنت عالي السرعة متاح مجاناً في جميع أنحاء المطار.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 passenger-service-card">
+              <div class="card-body text-center">
+                <div class="service-icon bg-warning-gradient mb-3"><i class="bi bi-person-wheelchair fs-1"></i></div>
+                <h5 class="card-title mb-2">مساعدة خاصة</h5>
+                <p class="card-text">خدمات دعم للمسافرين من ذوي الاحتياجات الخاصة وكبار السن والأطفال.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm border-0 passenger-service-card">
+              <div class="card-body text-center">
+                <div class="service-icon bg-secondary mb-3"><i class="bi bi-map fs-1"></i></div>
+                <h5 class="card-title mb-2">دليل المطار التفاعلي</h5>
+                <p class="card-text">خريطة تفاعلية لمرافق المطار لتسهيل التنقل والوصول للخدمات.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Travel Guidelines -->
+    <section id="travel-guidelines" class="py-5" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">إرشادات قبل/أثناء/بعد السفر</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 travel-guideline-card">
+              <div class="card-body text-center">
+                <div class="travel-guideline-icon bg-primary-gradient mb-3"><i class="bi bi-calendar2-check fs-1"></i></div>
+                <h5 class="card-title mb-2">قبل السفر</h5>
+                <ul class="list-unstyled text-end small mb-0">
+                  <li>تأكد من صلاحية جواز السفر والتأشيرات.</li>
+                  <li>احجز رحلتك مبكراً ورتب وسيلة النقل للمطار.</li>
+                  <li>راجع وزن الأمتعة المسموح به.</li>
+                  <li>احضر إلى المطار قبل موعد الرحلة بوقت كافٍ.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 travel-guideline-card">
+              <div class="card-body text-center">
+                <div class="travel-guideline-icon bg-success-gradient mb-3"><i class="bi bi-airplane-engines fs-1"></i></div>
+                <h5 class="card-title mb-2">أثناء السفر</h5>
+                <ul class="list-unstyled text-end small mb-0">
+                  <li>حافظ على مستندات السفر في متناول يدك.</li>
+                  <li>اتبع تعليمات الأمن والسلامة في المطار والطائرة.</li>
+                  <li>تأكد من معرفة بوابة الصعود إلى الطائرة.</li>
+                  <li>احرص على مراقبة متعلقاتك الشخصية.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
+            <div class="card h-100 shadow-sm border-0 travel-guideline-card">
+              <div class="card-body text-center">
+                <div class="travel-guideline-icon bg-info-gradient mb-3"><i class="bi bi-house-door-heart fs-1"></i></div>
+                <h5 class="card-title mb-2">بعد السفر</h5>
+                <ul class="list-unstyled text-end small mb-0">
+                  <li>تأكد من استلام جميع أمتعتك من السير.</li>
+                  <li>راجع جواز السفر وختم الدخول عند الوصول.</li>
+                  <li>اتبع تعليمات الجمارك إذا لزم الأمر.</li>
+                  <li>تأكد من وسيلة النقل من المطار إلى وجهتك.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Special Assistance -->
+    <section id="special-assistance" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">المساعدة الخاصة</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0 special-assistance-card p-4">
+              <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                <div class="special-assistance-icon bg-warning-gradient flex-shrink-0"><i class="bi bi-person-wheelchair fs-1"></i></div>
+                <div>
+                  <h5 class="fw-bold mb-2">دعم متكامل للمسافرين ذوي الاحتياجات الخاصة</h5>
+                  <p class="mb-2">نلتزم بتوفير تجربة سفر مريحة وآمنة للجميع. إذا كنت بحاجة إلى أي نوع من المساعدة الخاصة، يرجى إبلاغنا مسبقاً أو التواصل مع فريقنا في المطار.</p>
+                  <ul class="list-unstyled text-end mb-0 small">
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> مساعدة في التنقل داخل المطار والكراسي المتحركة</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> دعم للمسنين والأطفال غير المصحوبين</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> تسهيلات للركاب ذوي الإعاقة السمعية أو البصرية</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> أولوية في إجراءات السفر والأمن</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> خدمة المرافقة عند الطلب</li>
+                  </ul>
+                  <div class="mt-3 text-muted small">للطلب أو الاستفسار، يرجى التواصل مع مكتب خدمة العملاء أو عبر الهاتف: <a href="tel:249123456789" class="text-primary text-decoration-none">249123456789+</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Interactive Airport Guide -->
+    <section id="interactive-guide" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">دليل المطار التفاعلي</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0 interactive-guide-card p-4">
+              <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                <div class="interactive-guide-icon bg-info-gradient flex-shrink-0"><i class="bi bi-map fs-1"></i></div>
+                <div>
+                  <h5 class="fw-bold mb-2">استكشف المطار بسهولة</h5>
+                  <p class="mb-3">استخدم دليل المطار التفاعلي لتحديد مواقع البوابات، الخدمات، المرافق، والمطاعم داخل المطار بسرعة وسهولة. يمكنك تكبير الخريطة، البحث عن مرافق محددة، أو الحصول على توجيهات مباشرة.</p>
+                  <div class="text-center text-md-end">
+                    <a href="#" class="btn btn-info text-white px-4 disabled" tabindex="-1" aria-disabled="true">
+                      <i class="bi bi-arrows-move me-2"></i>الخريطة التفاعلية (قريباً)
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Lost & Found -->
+    <section id="lost-found" class="py-5" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center">المفقودات</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8">
+            <div class="card shadow-sm border-0 lost-found-card p-4 mb-4">
+              <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                <div class="lost-found-icon bg-warning-gradient flex-shrink-0"><i class="bi bi-search fs-1"></i></div>
+                <div>
+                  <h5 class="fw-bold mb-2">خدمة المفقودات</h5>
+                  <p class="mb-2">إذا فقدت شيئاً أثناء تواجدك في المطار، يمكنك التواصل مع مكتب المفقودات أو تعبئة نموذج الإبلاغ. نعمل على مساعدتك في استعادة متعلقاتك بأسرع وقت ممكن.</p>
+                  <ul class="list-unstyled text-end mb-0 small">
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> مكتب المفقودات متاح على مدار الساعة</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> تقديم بلاغ عبر الموقع أو الحضور شخصياً</li>
+                    <li><i class="bi bi-check-circle text-success ms-1"></i> التواصل عبر الهاتف: <a href="tel:249987654321" class="text-primary text-decoration-none">249987654321+</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- Lost Item Report Button and Modal -->
+            <div class="lost-found-form-wrapper mb-4 text-end">
+              <button type="button" class="btn btn-warning fw-bold px-4 py-2" data-bs-toggle="modal" data-bs-target="#lostFoundModal">
+                <i class="bi bi-pencil-square ms-1"></i>إبلاغ عن مفقودات
+              </button>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="lostFoundModal" tabindex="-1" aria-labelledby="lostFoundModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header bg-warning bg-gradient">
+                    <h5 class="modal-title fw-bold text-dark" id="lostFoundModalLabel"><i class="bi bi-pencil-square me-2"></i>نموذج الإبلاغ عن المفقودات</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="إغلاق"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form class="lost-found-form row g-3">
+                      <div class="col-md-6">
+                        <label for="lostName" class="form-label">الاسم الكامل</label>
+                        <input type="text" class="form-control" id="lostName" name="lostName" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="lostContact" class="form-label">رقم الهاتف أو البريد الإلكتروني</label>
+                        <input type="text" class="form-control" id="lostContact" name="lostContact" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="lostDate" class="form-label">تاريخ الفقدان</label>
+                        <input type="date" class="form-control" id="lostDate" name="lostDate" required>
+                      </div>
+                      <div class="col-md-6">
+                        <label for="lostLocation" class="form-label">الموقع التقريبي</label>
+                        <input type="text" class="form-control" id="lostLocation" name="lostLocation" placeholder="مثال: بوابة رقم 2" required>
+                      </div>
+                      <div class="col-12">
+                        <label for="lostDescription" class="form-label">وصف المفقودات</label>
+                        <input type="text" class="form-control" id="lostDescription" name="lostDescription" placeholder="مثال: حقيبة يد سوداء" required>
+                      </div>
+                      <div class="col-12">
+                        <label for="lostDetails" class="form-label">ملاحظات إضافية</label>
+                        <textarea class="form-control" id="lostDetails" name="lostDetails" rows="3"></textarea>
+                      </div>
+                      <div class="col-12 text-end">
+                        <button type="submit" class="btn btn-warning px-5 py-2 fw-bold">إرسال البلاغ <i class="bi bi-send ms-1"></i></button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive mb-5">
+              <table class="table table-bordered align-middle text-center bg-white">
+                <thead class="table-warning">
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الوصف</th>
+                    <th>الموقع</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-07-22</td>
+                    <td>هاتف محمول (سامسونج أسود)</td>
+                    <td>بوابة رقم 4</td>
+                    <td><span class="badge bg-success">تم العثور عليه</span></td>
+                  </tr>
+                  <tr>
+                    <td>2025-07-21</td>
+                    <td>حقيبة يد صغيرة (حمراء)</td>
+                    <td>منطقة الاستلام</td>
+                    <td><span class="badge bg-warning text-dark">قيد البحث</span></td>
+                  </tr>
+                  <tr>
+                    <td>2025-07-20</td>
+                    <td>محفظة بنية</td>
+                    <td>دورات المياه الرئيسية</td>
+                    <td><span class="badge bg-danger">لم يتم العثور عليه</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- Found Items List -->
+            <div class="found-items-list mb-3">
+              <h5 class="fw-bold mb-3"><i class="bi bi-box-seam text-success me-2"></i>قائمة بالموجودات</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered align-middle text-center bg-white">
+                  <thead class="table-success">
+                    <tr>
+                      <th>التاريخ</th>
+                      <th>الوصف</th>
+                      <th>الموقع الذي عُثر فيه</th>
+                      <th>آلية الاستلام</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>2025-07-23</td>
+                      <td>نظارة طبية سوداء</td>
+                      <td>صالة المغادرة</td>
+                      <td><span class="badge bg-primary">مكتب المفقودات</span></td>
+                    </tr>
+                    <tr>
+                      <td>2025-07-23</td>
+                      <td>ساعة يد (فضية)</td>
+                      <td>بوابة رقم 1</td>
+                      <td><span class="badge bg-primary">مكتب المفقودات</span></td>
+                    </tr>
+                    <tr>
+                      <td>2025-07-22</td>
+                      <td>دفتر ملاحظات بني</td>
+                      <td>منطقة المطاعم</td>
+                      <td><span class="badge bg-primary">مكتب المفقودات</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="text-muted small mt-2">يرجى مراجعة مكتب المفقودات مع إثبات الهوية لاستلام الموجودات.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Download Our App Section -->
+    <section id="download-app" class="py-5 bg-transparent wow animate__animated animate__fadeInUp" data-aos="fade-up">
+      <div class="container">
+        <div class="glass-card download-app-card text-center p-5 border-0 mb-4 mx-auto wow animate__animated animate__fadeInUp" style="max-width: 500px; border-radius: 2rem;">
+          <div class="mb-3">
+            <i class="bi bi-phone display-2 text-primary download-app-icon"></i>
+          </div>
+          <h2 class="fw-bold mb-2 display-6" style="letter-spacing:0.5px">حمّل تطبيق المطار</h2>
+          <p class="mb-4 text-muted fs-5">كل خدمات المطار في هاتفك.</p>
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center align-items-center">
+            <a href="#" class="store-badge" aria-label="تحميل من Google Play">
+              <img src="assets/google-play-ar.svg" alt="Google Play" height="48" loading="lazy" />
+            </a>
+            <a href="#" class="store-badge" aria-label="تحميل من App Store">
+              <img src="assets/app-store-ar.svg" alt="App Store" height="48" loading="lazy" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Airport Transportation -->
+      <div class="container">
+        <h2 class="mb-4 text-center">النقل من/إلى المطار</h2>
+        <div class="row justify-content-center mb-4">
+          <div class="col-12 col-md-10 col-lg-8">
+            <!-- Glassmorphism Main Info Card -->
+            <div class="card shadow-sm border-0 transport-info-card glass-card p-4 mb-4" aria-label="معلومات خيارات النقل">
+              <div class="d-flex flex-column flex-md-row align-items-center gap-4">
+                <div class="transport-icon bg-primary-gradient flex-shrink-0" aria-hidden="true"><i class="bi bi-bus-front fs-1"></i></div>
+                <div>
+                  <h5 class="fw-bold mb-2">خيارات النقل المريحة لجميع المسافرين</h5>
+                  <p class="mb-0">يقدم مطار الخرطوم الدولي مجموعة متنوعة من وسائل النقل لتسهيل وصولك ومغادرتك من وإلى المطار بكل راحة وأمان.</p>
+                </div>
+              </div>
+            </div>
+            <div class="transport-cards-row mb-4 row justify-content-center g-4">
+              <!-- Taxi Card -->
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm transport-card glass-card text-center" tabindex="0" aria-label="سيارات الأجرة، متوفرة على مدار الساعة أمام صالة الوصول. للحجز: 249-XXX-XXXX">
+                  <div class="card-body py-4">
+                    <div class="transport-type-icon bg-warning-gradient mb-3 mx-auto" aria-hidden="true"><i class="bi bi-taxi-front fs-1"></i></div>
+                    <h5 class="fw-bold mb-2">سيارات الأجرة</h5>
+                    <p class="small mb-2">متوفرة على مدار الساعة أمام صالة الوصول.</p>
+                    <div class="text-muted small">للحجز: <span dir="ltr">249-XXX-XXXX</span></div>
+                  </div>
+                </div>
+              </div>
+
+
+              
+              <!-- Car Rental Card -->
+              <div class="col-12 col-md-6 col-lg-4 mb-3 mb-lg-0">
+                <div class="card h-100 border-0 shadow-sm transport-card glass-card text-center" tabindex="0" aria-label="تأجير السيارات، شركات دولية ومحلية متوفرة في المطار. للحجز: مكاتب التأجير في صالة الوصول">
+                  <div class="card-body py-4">
+                    <div class="transport-type-icon bg-info-gradient mb-3 mx-auto" aria-hidden="true"><i class="bi bi-car-front fs-1"></i></div>
+                    <h5 class="fw-bold mb-2">تأجير السيارات</h5>
+                    <p class="small mb-2">شركات تأجير سيارات دولية ومحلية متوفرة في المطار.</p>
+                    <div class="text-muted small">للحجز: مكاتب التأجير في صالة الوصول</div>
+                  </div>
+                </div>
+              </div>
+          
+              <div class="col-12 col-md-6 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm transport-card text-center">
+                  <div class="card-body">
+                    <div class="transport-type-icon bg-secondary mb-3 mx-auto"><i class="bi bi-phone fs-2"></i></div>
+                    <h6 class="fw-bold mb-2">تطبيقات النقل</h6>
+                    <p class="small mb-2">استخدم تطبيقات النقل الذكية مثل ترحال أو كريم للوصول بسهولة.</p>
+                    <div class="text-muted small">متوفرة في جميع أنحاء المطار</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About -->
+    <section id="about" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10">
+            <div class="glass-card p-5 shadow-lg border-0 about-glass-card" aria-label="عن مطار الخرطوم الدولي">
+              <div class="row align-items-center gy-4 flex-row-reverse">
+                <div class="col-md-5 text-center mb-4 mb-md-0">
+                  <div class="about-icon-frame mx-auto mb-3">
+                    <i class="bi bi-airplane-engines fs-1"></i>
+                  </div>
+                  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Khartoum Airport" class="about-img img-fluid shadow">
+                </div>
+                <div class="col-md-7 text-md-end text-center">
+                  <h2 class="fw-bold mb-3 about-title">عن مطار الخرطوم الدولي</h2>
+                  <p class="lead mb-4">مطار الخرطوم الدولي هو البوابة الجوية الحديثة والرئيسية لجمهورية السودان، حيث يلتقي التراث العريق مع أحدث الخدمات لتوفير تجربة سفر استثنائية للمسافرين من جميع أنحاء العالم.</p>
+                  <ul class="about-list list-unstyled mb-0">
+                    <li class="mb-2"><i class="bi bi-geo-alt-fill text-primary ms-2"></i>موقع استراتيجي في قلب العاصمة السودانية</li>
+                    <li class="mb-2"><i class="bi bi-stars text-warning ms-2"></i>خدمات متطورة ومرافق حديثة للمسافرين</li>
+                    <li class="mb-2"><i class="bi bi-people text-info ms-2"></i>فريق عمل محترف لخدمة الزوار</li>
+                    <li><i class="bi bi-shield-check text-success ms-2"></i>تجربة سفر آمنة ومريحة على مدار الساعة</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Business Services -->
+    <section id="business-services" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-briefcase-fill text-primary me-2"></i>خدمات الأعمال</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm business-service-card text-center">
+              <div class="card-body">
+                <div class="business-service-icon bg-primary-gradient mb-3 mx-auto"><i class="bi bi-person-workspace"></i></div>
+                <h6 class="fw-bold mb-2">صالة الأعمال</h6>
+                <p class="small mb-0">استمتع بمساحة هادئة للعمل والاسترخاء مع خدمات ضيافة متميزة.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm business-service-card text-center">
+              <div class="card-body">
+                <div class="business-service-icon bg-warning-gradient mb-3 mx-auto"><i class="bi bi-people"></i></div>
+                <h6 class="fw-bold mb-2">غرف الاجتماعات</h6>
+                <p class="small mb-0">غرف مجهزة بالكامل لعقد الاجتماعات والمؤتمرات مع جميع وسائل الراحة.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm business-service-card text-center">
+              <div class="card-body">
+                <div class="business-service-icon bg-success-gradient mb-3 mx-auto"><i class="bi bi-printer"></i></div>
+                <h6 class="fw-bold mb-2">الطباعة والنسخ</h6>
+                <p class="small mb-0">خدمات طباعة ونسخ متكاملة للمستندات والعروض التقديمية.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm business-service-card text-center">
+              <div class="card-body">
+                <div class="business-service-icon bg-info-gradient mb-3 mx-auto"><i class="bi bi-wifi"></i></div>
+                <h6 class="fw-bold mb-2">واي فاي عالي السرعة</h6>
+                <p class="small mb-0">اتصال إنترنت سريع ومجاني في جميع مناطق الأعمال.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm business-service-card text-center">
+              <div class="card-body">
+                <div class="business-service-icon bg-secondary mb-3 mx-auto"><i class="bi bi-gem"></i></div>
+                <h6 class="fw-bold mb-2">خدمات كبار الشخصيات (VIP)</h6>
+                <p class="small mb-0">تجربة فاخرة وخدمات مخصصة لرجال الأعمال وكبار الزوار.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Bids & Leasing -->
+    <section id="bids-leasing" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-cash-coin text-warning me-2"></i>مزايدات وتأجير داخل المطار</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm leasing-card text-center">
+              <div class="card-body">
+                <div class="leasing-icon bg-primary-gradient mb-3 mx-auto"><i class="bi bi-shop"></i></div>
+                <h6 class="fw-bold mb-2">تأجير المحلات التجارية</h6>
+                <p class="small mb-0">فرص لتأجير المحلات التجارية بمواقع استراتيجية داخل المطار.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm leasing-card text-center">
+              <div class="card-body">
+                <div class="leasing-icon bg-warning-gradient mb-3 mx-auto"><i class="bi bi-basket"></i></div>
+                <h6 class="fw-bold mb-2">تأجير الأكشاك</h6>
+                <p class="small mb-0">مساحات مخصصة للأكشاك التجارية والخدمية داخل صالات المطار.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm leasing-card text-center">
+              <div class="card-body">
+                <div class="leasing-icon bg-success-gradient mb-3 mx-auto"><i class="bi bi-cup-straw"></i></div>
+                <h6 class="fw-bold mb-2">المقاهي والمطاعم</h6>
+                <p class="small mb-0">فرص استثمارية في قطاع الأغذية والمشروبات داخل المطار.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card h-100 border-0 shadow-sm leasing-card text-center">
+              <div class="card-body">
+                <div class="leasing-icon bg-info-gradient mb-3 mx-auto"><i class="bi bi-megaphone"></i></div>
+                <h6 class="fw-bold mb-2">الإعلانات داخل المطار</h6>
+                <p class="small mb-0">مساحات للإعلانات والعروض الترويجية لجذب المسافرين والزوار.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          <a href="#contact" class="btn btn-warning rounded-pill px-4 py-2 fw-bold"><i class="bi bi-envelope-open"></i> للاستفسار والتقديم</a>
+        </div>
+      </div>
+    </section>
+    <!-- Supplier Registration -->
+    <section id="supplier-registration" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-person-lines-fill text-success me-2"></i>تسجيل الموردين</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="card border-0 shadow-sm supplier-card p-4">
+              <div class="card-body">
+                <h5 class="fw-bold mb-3 text-center">انضم إلى قائمة الموردين المعتمدين لمطار الخرطوم</h5>
+                <p class="mb-3 text-center">ندعو جميع الشركات والمؤسسات الراغبة في تقديم خدمات أو توريد منتجات للمطار إلى التسجيل كمورد معتمد والاستفادة من فرص التعاون والشراكة.</p>
+                <ul class="list-unstyled mb-4 text-center">
+                  <li><i class="bi bi-check-circle-fill text-success ms-2"></i> فرص منافسة عادلة وشفافة</li>
+                  <li><i class="bi bi-check-circle-fill text-success ms-2"></i> الوصول إلى مناقصات وعقود جديدة</li>
+                  <li><i class="bi bi-check-circle-fill text-success ms-2"></i> دعم فني وفريق مخصص للتواصل</li>
+                </ul>
+                <div class="text-center">
+                  <a href="#contact" class="btn btn-success rounded-pill px-4 py-2 fw-bold"><i class="bi bi-pencil-square"></i> سجل الآن كمورد</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Jobs -->
+    <section id="jobs" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-briefcase text-primary me-2"></i>الوظائف</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10">
+            <div class="card border-0 shadow-sm jobs-card p-4 mb-4">
+              <div class="card-body">
+                <h5 class="fw-bold mb-3 text-center">انضم إلى فريق مطار الخرطوم الدولي</h5>
+                <p class="mb-3 text-center">نبحث دائماً عن الكفاءات المتميزة للانضمام إلى فريقنا في مختلف التخصصات. إذا كنت ترغب في تطوير مسيرتك المهنية في بيئة عمل احترافية، قدم الآن!</p>
+                <div class="table-responsive">
+                  <table class="table table-bordered align-middle text-center mb-0">
+                    <thead class="table-primary">
+                      <tr>
+                        <th>المسمى الوظيفي</th>
+                        <th>القسم</th>
+                        <th>الحالة</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>موظف استقبال</td>
+                        <td>خدمة العملاء</td>
+                        <td><span class="badge bg-success">متاح</span></td>
+                      </tr>
+                      <tr>
+                        <td>مهندس صيانة</td>
+                        <td>الهندسة والدعم الفني</td>
+                        <td><span class="badge bg-warning text-dark">قريباً</span></td>
+                      </tr>
+                      <tr>
+                        <td>مسؤول أمن</td>
+                        <td>الأمن والسلامة</td>
+                        <td><span class="badge bg-danger">مغلق</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="text-center mt-4">
+                  <a href="#contact" class="btn btn-primary rounded-pill px-4 py-2 fw-bold"><i class="bi bi-send"></i> قدم الآن</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Forms -->
+    <section id="contact-forms" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-ui-checks-grid text-primary me-2"></i>نماذج تواصل</h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm contact-form-card p-4 h-100">
+              <div class="card-body">
+                <h5 class="fw-bold mb-3 text-primary text-center"><i class="bi bi-envelope-paper ms-2"></i>نموذج استفسار عام</h5>
+                <form>
+                  <div class="mb-3 text-end">
+                    <label for="generalName" class="form-label">الاسم</label>
+                    <input type="text" class="form-control" id="generalName" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="generalEmail" class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-control" id="generalEmail" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="generalMessage" class="form-label">الاستفسار</label>
+                    <textarea class="form-control" id="generalMessage" rows="3" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold py-2">إرسال الاستفسار</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+            <div class="card border-0 shadow-sm contact-form-card p-4 h-100">
+              <div class="card-body">
+                <h5 class="fw-bold mb-3 text-success text-center"><i class="bi bi-chat-dots ms-2"></i>نموذج الملاحظات والاقتراحات</h5>
+                <form>
+                  <div class="mb-3 text-end">
+                    <label for="feedbackName" class="form-label">الاسم</label>
+                    <input type="text" class="form-control" id="feedbackName" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="feedbackEmail" class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-control" id="feedbackEmail" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="feedbackMessage" class="form-label">ملاحظتك أو اقتراحك</label>
+                    <textarea class="form-control" id="feedbackMessage" rows="3" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-success w-100 rounded-pill fw-bold py-2">إرسال الملاحظة</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact -->
+    <section id="contact" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-envelope-fill text-primary me-2"></i>اتصل بنا</h2>
+        <div class="row justify-content-center g-4">
+          <div class="col-12 col-lg-5">
+            <div class="card border-0 shadow-sm h-100 contact-info-card p-4 mb-4">
+              <div class="card-body">
+                <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-geo-alt-fill ms-2"></i>العنوان</h5>
+                <p class="mb-3">مطار الخرطوم الدولي، شارع أفريقيا، الخرطوم، السودان</p>
+                <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-telephone-fill ms-2"></i>الهاتف</h5>
+                <p class="mb-3">+249 183 777 000</p>
+                <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-envelope-at-fill ms-2"></i>البريد الإلكتروني</h5>
+                <p class="mb-3">info@khartoumairport.sd</p>
+                <div class="mt-4">
+                  <a href="#" class="text-secondary fs-4 me-3" title="تويتر"><i class="bi bi-twitter-x"></i></a>
+                  <a href="#" class="text-secondary fs-4 me-3" title="فيسبوك"><i class="bi bi-facebook"></i></a>
+                  <a href="#" class="text-secondary fs-4 me-3" title="انستغرام"><i class="bi bi-instagram"></i></a>
+                  <a href="#" class="text-secondary fs-4" title="لينكدإن"><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-lg-7">
+            <div class="card border-0 shadow-sm h-100 contact-form-card p-4">
+              <div class="card-body">
+                <h5 class="fw-bold mb-4 text-center text-primary">نموذج التواصل</h5>
+                <form class="mx-auto" style="max-width: 480px;">
+                  <div class="mb-3 text-end">
+                    <label for="name" class="form-label">الاسم</label>
+                    <input type="text" class="form-control" id="name" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="email" class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-control" id="email" required>
+                  </div>
+                  <div class="mb-3 text-end">
+                    <label for="message" class="form-label">رسالتك</label>
+                    <textarea class="form-control" id="message" rows="4" required></textarea>
+                  </div>
+                  <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold py-2">إرسال</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Performance Evaluation Service -->
+    <section id="performance-evaluation" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-star-fill text-warning me-2"></i>خدمة تقييم الأداء</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="card border-0 shadow-sm eval-card p-4">
+              <div class="card-body text-center">
+                <div class="eval-icon bg-warning mb-3 mx-auto"><i class="bi bi-award fs-1"></i></div>
+                <p class="mb-4">ساهم في تحسين خدمات المطار من خلال تقييم تجربتك وإرسال ملاحظاتك واقتراحاتك بكل سهولة وسرية.</p>
+                <a href="#contact-forms" class="btn btn-warning rounded-pill px-4 py-2 fw-bold"><i class="bi bi-star"></i> قيّم تجربتك</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Flight Notification System -->
+    <section id="flight-notifications" class="py-5 bg-light" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-bell-fill text-danger me-2"></i>نظام إشعارات الرحلات</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="card border-0 shadow-sm notif-card p-4">
+              <div class="card-body text-center">
+                <div class="notif-icon bg-danger mb-3 mx-auto"><i class="bi bi-bell fs-1"></i></div>
+                <p class="mb-4">اشترك في نظام الإشعارات ليصلك كل جديد حول مواعيد الرحلات، التأخيرات، والتغييرات الهامة مباشرة على هاتفك أو بريدك الإلكتروني.</p>
+                <a href="#" class="btn btn-danger rounded-pill px-4 py-2 fw-bold"><i class="bi bi-bell"></i> اشترك الآن</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Parking Reservation System -->
+    <section id="parking-reservation" class="py-5 bg-white" data-aos="fade-up">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-car-front-fill text-success me-2"></i>نظام حجز مواقف السيارات</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <div class="card border-0 shadow-sm parking-card p-4">
+              <div class="card-body text-center">
+                <div class="parking-icon bg-success mb-3 mx-auto"><i class="bi bi-car-front fs-1"></i></div>
+                <p class="mb-4">وفر وقتك وجهدك واحجز موقف سيارتك مسبقًا عبر نظام الحجز الإلكتروني السهل والسريع.</p>
+                <a href="#" class="btn btn-success rounded-pill px-4 py-2 fw-bold"><i class="bi bi-calendar-check"></i> احجز موقفك الآن</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Geographical Location -->
+    <section id="geo-location" class="py-5 bg-white">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-geo-alt-fill text-danger me-2"></i>الموقع الجغرافي</h2>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-10">
+            <div class="card border-0 shadow-sm p-4 geo-card">
+              <div class="card-body">
+                <p class="mb-4 text-center">يقع مطار الخرطوم الدولي في قلب العاصمة السودانية، ويمكن الوصول إليه بسهولة من جميع الاتجاهات.</p>
+                <div class="ratio ratio-16x9 rounded overflow-hidden">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3477.601899835943!2d32.55379841509386!3d15.589524989178352!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x168e8e31f6b1e3d5%3A0x7e7d5c8b8d0e6a5e!2z2KfZhNmF2YjZhNmK2Kkg2KfZhNmF2K3Yp9mB2YrYqQ!5e0!3m2!1sar!2sus!4v1713900000000!5m2!1sar!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="موقع مطار الخرطوم الدولي"></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Accounts -->
+    <section id="social-media" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="mb-4 text-center"><i class="bi bi-share-fill text-info me-2"></i>حسابات التواصل الاجتماعي</h2>
+        <div class="d-flex justify-content-center">
+          <div class="social-glass-card p-4 p-md-5 mb-3 w-100 w-md-75 w-lg-50">
+            <div class="d-flex flex-wrap justify-content-center gap-4 gap-lg-5 align-items-center">
+              <a href="#" class="social-glass-icon twitter" title="تويتر" aria-label="تويتر"><i class="bi bi-twitter-x"></i><div class="social-glass-label">تويتر</div></a>
+              <a href="#" class="social-glass-icon facebook" title="فيسبوك" aria-label="فيسبوك"><i class="bi bi-facebook"></i><div class="social-glass-label">فيسبوك</div></a>
+              <a href="#" class="social-glass-icon instagram" title="انستغرام" aria-label="انستغرام"><i class="bi bi-instagram"></i><div class="social-glass-label">انستغرام</div></a>
+              <a href="#" class="social-glass-icon linkedin" title="لينكدإن" aria-label="لينكدإن"><i class="bi bi-linkedin"></i><div class="social-glass-label">لينكدإن</div></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbotToggle" class="chatbot-toggle-btn btn btn-primary rounded-circle shadow">
+      <i class="bi bi-chat-dots fs-3"></i>
+    </button>
+    <!-- Chatbot Widget -->
+    <div class="chatbot shadow" id="chatbot">
+      <div class="chatbot-header d-flex justify-content-between align-items-center">
+        <span>مساعد المطار</span>
+        <button id="chatbotClose" class="btn btn-sm btn-light"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <div class="chatbot-body" id="chatbotBody">
+        <div class="chatbot-message bot">مرحباً! كيف يمكنني مساعدتك اليوم؟</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="chatbotInput" placeholder="اكتب سؤالك...">
+        <button id="chatbotSend">إرسال</button>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer mt-5 pt-4 pb-2 bg-dark text-white text-center text-lg-end">
+      <div class="container">
+        <div class="row align-items-center mb-3">
+          <div class="col-lg-4 mb-3 mb-lg-0 d-flex align-items-center justify-content-center justify-content-lg-start">
+            <img src="https://cdn-icons-png.flaticon.com/512/684/684908.png" alt="Airport Logo" width="38" height="38" class="me-2" style="object-fit:contain;">
+            <span class="fw-bold fs-5">مطار الخرطوم الدولي</span>
+          </div>
+          <div class="col-lg-4 mb-3 mb-lg-0">
+            <ul class="list-inline mb-0 footer-links">
+              <li class="list-inline-item"><a href="#hero" class="text-white text-decoration-none">الرئيسية</a></li>
+              <li class="list-inline-item"><a href="#about" class="text-white text-decoration-none">عن المطار</a></li>
+              <li class="list-inline-item"><a href="#business-services" class="text-white text-decoration-none">خدمات الأعمال</a></li>
+              <li class="list-inline-item"><a href="#jobs" class="text-white text-decoration-none">الوظائف</a></li>
+              <li class="list-inline-item"><a href="#contact" class="text-white text-decoration-none">اتصل بنا</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-center justify-content-lg-end gap-3">
+            <a href="#" class="footer-social-link" title="تويتر"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" class="footer-social-link" title="فيسبوك"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="footer-social-link" title="انستغرام"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="footer-social-link" title="لينكدإن"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+        <div class="border-top border-secondary pt-3 small text-center text-secondary">
+          جميع الحقوق محفوظة &copy; مطار الخرطوم الدولي 2025
+        </div>
+      </div>
+    </footer>
+    <!-- Bootstrap JS & Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="main.js"></script>
+  <!-- Anime.js Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+  <!-- WOW.js Animation Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+  <!-- AOS Animation Library -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init({ once: true, duration: 900, easing: 'ease-out-cubic' });</script>
+</body>
+</html>
